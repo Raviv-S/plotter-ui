@@ -18,15 +18,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { IntlProvider } from "react-intl";
-import AllTypesCanvas from "./pipelines/plotter-4.json";
-import ModelerPalette from "./palettes/modelerPalette.json";
-// Note use "@elyra/canvas" instead of "common-canvas" here, if you are importing from the NPM module.
+import AllTypesCanvas from "./pipelines/generated-pipeline.json";
 import { CommonCanvas, CanvasController } from "@elyra/canvas";
 import { CommonProperties } from "@elyra/canvas";
 import "./index.scss";
 import paramDef from "./param-def/param-def-gen.json";
 import paramDef2 from "./param-def/groups-demo.json";
-// import testy from "./testj.json";
 
 
 class App extends React.Component {
