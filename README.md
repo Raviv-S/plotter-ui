@@ -2,12 +2,14 @@
 
 `plotter-ui` is a tool to visualize Fybrik plotter.
 
+The UI is built with [elyra-canvas](https://github.com/elyra-ai/canvas/wiki).
+
 ## Setup:
 
 ### Requirements:
 `go` version 1.16+
 
-`node` version 14.20.0
+`node` version 14.X.X
 
 
 ### Setup required:
