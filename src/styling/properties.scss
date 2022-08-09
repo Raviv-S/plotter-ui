@@ -1,0 +1,286 @@
+/*
+ * Copyright 2017-2020 Elyra Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+.harness-properties-documentation-container > .right-flyout-panel,
+.harness-conditions-documentation-container > .right-flyout-panel {
+	top: 0;
+	right: 0;
+	padding-top: 50px;
+	box-shadow: none;
+	position: fixed;
+}
+
+.harness-properties-documentation-container > .right-flyout-panel >
+.properties-right-flyout > .properties-modal-buttons,
+.harness-conditions-documentation-container > .right-flyout-panel >
+.properties-right-flyout > .properties-modal-buttons {
+	display: none;
+}
+
+.harness-properties-documentation-container-main-content,
+.harness-conditions-documentation-container-main-content {
+	-webkit-transition: 0.2s ease-out;
+	transition: 0.2s ease-out;
+	position: fixed;
+	top: 50px;
+	height: calc(100% - 50px);
+	overflow-x: scroll;
+	p {
+		font-size: 14px;
+		font-weight: 200;
+		line-height: 20px;
+		margin: 6px 0;
+	}
+}
+
+/* Properties Navbar */
+.harness-properties-documentation-navbar-items {
+	position: fixed;
+	width: 100%;
+	height: 50px;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: $text-01;
+	z-index: 4;
+}
+
+#harness-properties-documentation-title,
+#harness-conditions-documentation-title {
+	color: $inverse-01;
+	padding: 14px;
+	font-size: 14px;
+
+	&:hover {
+		cursor: default;
+		background-color: $text-01;
+		color: $inverse-01;
+	}
+}
+
+.harness-properties-documentation-menu,
+.harness-conditions-documentation-menu {
+	position: fixed;
+	right: 0;
+	z-index: 5;
+	margin-right: 10px;
+	padding: 10px 0 0 10px;
+
+	.bx--list-box__menu {
+		height: 210px;
+		max-height: 330px;
+	}
+
+	.bx--dropdown__wrapper .bx--dropdown {
+		width: 150px;
+		background-color: $ui-01;
+
+		&:hover {
+			background-color: $hover-ui;
+		}
+	}
+}
+
+.harness-properties-documentation-navbar-li {
+	float: left;
+	height: 50px;
+	display: flex;
+	align-items: center;
+
+	&::after {
+		clear: both;
+	}
+
+	a {
+		display: block;
+		text-align: center;
+		padding: 14px 12px;
+		color: $inverse-01;
+		fill: $brand-01;
+		font-size: 16px;
+		background-color: $text-01;
+		cursor: pointer;
+
+		&:hover {
+			background-color: #2D3F49;
+			color: $support-04;
+		}
+	}
+}
+
+/* Header section */
+.harness-properties-documentation-section-header {
+	background: $ui-02;
+	padding: 4.5em 4em 2em;
+	position: relative;
+	color: $text-01;
+	> h1 {
+		font-size: 4rem;
+	}
+}
+
+.harness-properties-documentation-page-link {
+	text-align: center;
+	display: block;
+	margin: 1.5em 0 0;
+	color: $text-01;
+	font-size: 1em;
+	vertical-align: middle;
+	text-decoration: none;
+
+	&:hover {
+		color: $text-01;
+		text-decoration: underline;
+	}
+}
+
+.harness-properties-documentation-page-intro-link:hover {
+	text-decoration: underline;
+}
+
+/* Properties Content */
+.harness-properties-documentation-content,
+.harness-conditions-documentation-content {
+	padding: 1em;
+	background-color: $ui-01;
+}
+
+.harness-conditions-documentation-panels-controls-component,
+.harness-properties-documentation-panels-controls-component {
+	position: relative;
+	padding-bottom: 5px;
+
+	.well {
+		margin-bottom: 5px;
+	}
+}
+
+.harness-section-subtitle {
+	margin-top: 15px;
+	font-weight: 400;
+}
+
+.harness-properties-documentation-section-title {
+	border-bottom: 1px solid;
+	margin-bottom: 0.5em;
+}
+
+.harness-section-description {
+	& ul {
+		list-style-type: disc;
+		margin-left: 1em;
+		margin-bottom: 10px;
+	}
+	& li {
+		margin-bottom: 5px;
+	}
+}
+
+.harness-section-row {
+	width: 100%;
+	display: inline-flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.harness-section-row-title {
+	font-size: 1.282rem;
+}
+
+.harness-section-column {
+	width: 50%;
+	flex-grow: 1;
+	flex-shrink: 0;
+	padding-right: 1em;
+	.properties-custom-container {
+		width: 100%;
+		border: 1px solid $ui-03;
+		padding: 5px;
+	}
+}
+
+.harness-section-column-code {
+	padding-right: 0;
+}
+
+.harness-json-block {
+	font-size: 12px;
+	line-height: 1.5;
+	max-height: 565px;
+	background-color: $ui-02;
+	border: 1px solid $ui-03;
+	padding: 5px;
+	overflow: auto;
+}
+
+#harness-expression-section-column-code > .harness-json-block {
+	max-height: 616px;
+}
+
+#harness-summary-section-column-code > .harness-json-block {
+	max-height: 849px;
+}
+
+.harness-highlight {
+	background-color: $ui-03;
+	font-weight: 400;
+	border-radius: 4px;
+}
+
+.harness-conditions-documentation-control-table-container {
+	width: 100%;
+	overflow-x: scroll;
+	.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+		padding: 8px;
+		border-top: 1px solid $ui-03;
+		line-height: 1.25;
+		vertical-align: bottom;
+	}
+}
+
+.harness-conditions-documentation-control-table {
+	width: 100%;
+	height: 100%;
+	& tr.reactable-column-header {
+		display: table-row;
+		> th {
+			display: table-cell;
+			text-align: left;
+			font-weight: 700;
+		}
+	}
+	> thead > tr > th:focus {
+		outline: none;
+	}
+	& tr {
+		border-bottom-color: $ui-03;
+	}
+}
+
+.harness-properties-documentation-list-indent {
+	margin-left: 10px;
+}
+
+.harness-properties-documentation-show-flyout-button {
+	margin: 5px 0;
+}
+
+
+.bx--list-box__menu {
+	max-height: 23em;
+	overflow-x: hidden;
+}

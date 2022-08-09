@@ -1,0 +1,89 @@
+/*
+ * Copyright 2017-2020 IBM Corporation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* These styles are used in the explainCanvas.json. */
+$node-body-stroke: $ui-05;
+$node-body-fill: $ui-01;
+
+.nodes-colors {
+	// .d3-node-body-outline {
+	// 	stroke: #828281;
+	// 	fill: #FFFAC2;
+	// 	stroke-width: 2;
+	// 	text-anchor: middle;
+	// }
+
+	// .d3-node-label {
+	// 	font-size: 13px;
+	// 	font-weight: 600;
+	// 	text-anchor: middle;
+	// 	user-select: none; // Prevents text highlighting on drag over
+	// }
+
+	.small_text {
+		font-size: 11px;
+		text-anchor: middle;
+		user-select: none; // Prevents text highlighting on drag over
+	}
+
+	.default {
+		stroke: $node-body-stroke;
+		stroke-width: 1;
+		fill: $node-body-fill;
+	}
+	
+
+	.dark_purple {
+		stroke: #828281;
+		fill: #C2A7CE;
+		stroke-width: 2;
+	}
+
+	.light_purple {
+		stroke: #828281;
+		fill: #F1F0FE;
+		stroke-width: 2;
+	}
+
+	.light_brown {
+		stroke: #828281;
+		fill: #F3DAD4;
+		stroke-width: 2;
+	}
+
+	// .pink {
+	// 	stroke: #828281;
+	// 	fill: #F9BEB8;
+	// 	stroke-width: 2;
+	// }
+
+	.gray {
+		stroke: #828281;
+		fill: #BCB7BD;
+		stroke-width: 2;
+	}
+
+	.light_green {
+		stroke: #828281;
+		fill: #E8F0C1;
+		stroke-width: 2;
+	}
+	.comment-2 .d3-comment-rect {
+		stroke: #828281;
+		fill: #E8F0C1;
+		stroke-width: 2;
+	}
+}

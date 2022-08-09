@@ -1,0 +1,15 @@
+{
+  "titleDefinition": {
+    "title": "Properties Title",
+    "editable": false
+  },
+    "current_parameters": {
+      "targetField": "bbbbb"
+    },
+    "parameters": [
+      {
+        "id":"targetField",
+        "type":"string"
+      }
+  ]
+}

@@ -1,0 +1,46 @@
+/*
+ * Copyright 2017-2020 Elyra Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+$font-prefix: "/fonts";
+//@import "@ibm/plex/scss/ibm-plex.scss";
+
+// @import "@carbon/themes/scss/themes";
+// Switch the theme's below to change light <-> dark theme for harness
+// Modify common-canvas/src/themes/light.scss to switch common-canvas.
+// $carbon--theme: $carbon--theme--g10; // The light (gray 10) theme
+// $carbon--theme: $carbon--theme--g90; // The dark theme
+// @include carbon--theme;
+@import "carbon-components/scss/globals/scss/styles";
+@import "carbon-components/scss/globals/scss/typography";
+@import "carbon-components/scss/globals/scss/vars";
+
+@import "@elyra/canvas/src/common-properties/index.scss";
+@import "@elyra/canvas/src/notification-panel/notification-panel.scss";
+@import "@elyra/canvas/src/icons/icon.scss";
+@import "@elyra/canvas/src/toolbar/toolbar.scss";
+@import "@elyra/canvas/src/tooltip/tooltip.scss";
+@import "@elyra/canvas/src/context-menu/context-menu.scss";
+@import "@elyra/canvas/src/palette/palette.scss";
+@import "@elyra/canvas/src/common-canvas/common-canvas.scss";
+@import "./styling/svg-canvas-d3.scss";
+@import "./styling/canvas-customization.scss";
+@import "./styling/sidepanel.scss";
+@import "./styling/App.scss";
+@import "./styling/properties.scss";
+@import "./styling/custom-datasets-table.scss";
+@import "./styling/custom-controls.scss";
+@import "./styling/glmm.scss";
+@import "./styling/nodes-colors.scss"

@@ -1,0 +1,121 @@
+/*
+ * Copyright 2017-2020 Elyra Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+.datasets-columns-type-icon {
+	width: 15px;
+	height: 15px;
+	float: left;
+	margin-right: 5px;
+	fill: #3D70B2;
+}
+
+#datasets-table-container>table>tbody>.datasets-columns-rows>td {
+	padding: 5px 0;
+}
+
+tr.datasets-columns-rows {
+	border-bottom: 1px solid #DFE3E6;
+}
+
+#datasets-table-container>table>tbody>.datasets-columns-rows>td[label="checkbox"] {
+	padding-left: 15px;
+}
+
+.datasets-table-container-header-wrapper {
+	position: absolute;
+	height: 32px;
+	overflow: hidden;
+	width: 100%;
+	z-index: 1;
+	display: inline-block;
+}
+
+.datasets-table-header-container {
+	padding: 0;
+	position: absolute;
+	height: 32px;
+	z-index: 100;
+}
+
+#datasets-table-container>table>tbody>tr>td {
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	word-break: break-word;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+}
+
+#datasets-table-container {
+	height: 100%;
+}
+
+#datasets-table-container>table>thead>tr>th {
+	padding: 5px;
+}
+
+#datasets-table-container-wrapper {
+	height: 230px;
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+}
+
+.datasets-table-container-absolute {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+	border-right: 1px solid #DFE3E6;
+	border-left: 1px solid #DFE3E6;
+	border-bottom: 1px solid #DFE3E6;
+	background-color: #FFFFFF;
+}
+
+tr.datasets-table-row {
+	border-bottom: 1px solid #DFE3E6;
+}
+
+.datasets-table-selected-row {
+	background-color: #DFE3E6;
+}
+
+.left-padding-15px {
+	padding-left: 15px;
+}
+
+.left-right-padding-8 {
+	padding: 0 8px;
+}
+
+.datasets-header-border {
+	background-color: #F5F7FA;
+	border: 1px solid #DFE3E6;
+	border-bottom: 1px solid #DFE3E6;
+}
+
+.datasets-table {
+	margin-bottom: 0;
+}
+
+.datasets-table>tbody>tr:nth-child(1)>td {
+	border-top: 0;
+}
+
+.datasets-table-cell.disabled {
+	color: #C7C7C7;
+}

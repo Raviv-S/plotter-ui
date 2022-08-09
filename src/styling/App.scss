@@ -1,0 +1,295 @@
+/*
+ * Copyright 2017-2020 Elyra Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+$harness-navbar-title-width: 120px;
+$harness-navbar-icon-width: 48px;
+
+#harness-app-container {
+	height: 100vh;
+	overflow: hidden;
+}
+
+.harness-canvas-container,
+.harness-canvas-container.double {
+	height: calc(100% - 52px);
+	transition: width 0.5s;
+}
+
+.harness-canvas-single {
+	height: 50%;
+}
+
+.light_brown {
+	stroke: #828281;
+	fill: #F3DAD4;
+	stroke-width: 2;
+}
+
+.harness-title {
+	color: $text-01;
+	min-width: $harness-navbar-title-width;
+	display: block;
+	font-size: 14px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 15px;
+}
+
+.harness-version {
+	color: $text-01;
+	display: block;
+	font-size: 8px;
+	text-align: right;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+/* Styles for elements displayed for empty canvas. */
+.harness-empty-image {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	width: 174px;
+	height: 121px;
+	opacity: 0.5;
+	fill: $text-02;
+}
+
+.harness-empty-link {
+	display: block;
+	color: $text-02;
+	opacity: 0.5;
+	font-size: 20px;
+	text-align: center;
+	text-decoration: underline;
+	cursor: pointer;
+	pointer-events: all;
+}
+
+.harness-empty-text {
+	display: block;
+	color: $text-02;
+	opacity: 0.5;
+	font-size: 20px;
+	text-align: center;
+}
+
+/*Navbar*/
+.harness-app-navbar {
+	height: 50px;
+}
+
+.harness-app-navbar-items {
+	position: fixed;
+	width: 100%;
+	height: 50px;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: $ui-01;
+	border-bottom: 2px solid $ui-03;
+}
+
+.harness-navbar-li {
+	float: left;
+	height: 100%;
+	display: block;
+	align-items: center;
+
+	a {
+		display: block;
+		text-align: center;
+		padding: 14px;
+		width: 18px;
+		fill: $icon-01;
+		box-sizing: content-box;
+		cursor: pointer;
+
+		&:hover {
+			background-color: $ui-03;
+		}
+	}
+}
+
+.harness-action-bar-sidepanel {
+	float: right;
+}
+
+.harness-nav-divider {
+	border-left: 2px solid $ui-03;
+}
+
+/* Navbar Breadcrumbs */
+.harness-pipeline-breadcrumbs-container {
+	max-width: calc(100% - #{$harness-navbar-title-width} - (#{$harness-navbar-icon-width} * 5));
+	display: inline-flex;
+	flex-wrap: wrap;
+	overflow-y: auto;
+}
+
+.harness-pipeline-breadcrumbs {
+	height: 16px;
+	display: inline-flex;
+	align-items: center;
+	.harness-pipeline-breadcrumbs-label {
+		cursor: pointer;
+		display: inline;
+		border: 0;
+		background-color: transparent;
+		padding: 0 5px;
+		font-size: 12px;
+		color: $text-01;
+
+		&:hover {
+			color: $link-01;
+			text-decoration-line: underline;
+		}
+		&.last-item {
+			cursor: default;
+			height: 10px;
+			&:hover {
+				color: $text-01;
+				text-decoration-line: none;
+			}
+		}
+	}
+
+	.harness-pipeline-breadcrumbs-separator {
+		font-size: 13px;
+	}
+}
+
+/*Console*/
+.harness-app-console {
+	font-size: small;
+	border-top: 1px solid $text-01;
+	background-color: $ui-02;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	transition: height 2s;
+	overflow-y: auto;
+	z-index: 1;
+	padding-left: 1em;
+	line-height: 1.1;
+	word-wrap: break-word;
+}
+
+.harness-console-pretty-json {
+	margin: 0 10px 10px 0;
+	border: 0;
+	border-bottom: 1px dashed $ui-05;
+}
+
+.harness-console-entry {
+	list-style: none;
+
+	&::before {
+		content: "• ";
+		padding-right: 10px;
+	}
+	&:hover {
+		background-color: $ui-03;
+		cursor: pointer;
+	}
+	&:hover::before {
+		content: "+";
+		padding-right: 12px;
+	}
+}
+
+.harness-panel-temp-content {
+	background-color: $ui-01;
+	padding: 30px;
+	color: $text-03;
+	font-size: 20px;
+	& .text {
+		font-size: 16px;
+	}
+}
+
+.harness-side-panel-header {
+	padding: 0 20px;
+	color: $text-01;
+	font-size: 16px;
+}
+
+/* Provide animation key frames for sample progress indication in harness */
+@keyframes blink {
+	from {
+		stroke: #008000; // Green
+		stroke-width: 4;
+	}
+	to {
+		stroke: #FFA500; // Orange
+		stroke-width: 4;
+	}
+}
+
+@keyframes wiggle1 {
+	0% {
+		transform-origin: 35px 25px;
+		transform: rotate(3deg);
+	}
+	50% {
+		transform-origin: 35px 25px;
+		transform: rotate(-3deg);
+	}
+	100% {
+		transform-origin: 35px 25px;
+		transform: rotate(3deg);
+	}
+}
+
+@keyframes wiggle2 {
+	0% {
+		transform-origin: 35px 25px;
+		transform: rotate(3deg);
+	}
+	12% {
+		transform-origin: 35px 25px;
+		transform: rotate(-3deg);
+	}
+	25% {
+		transform-origin: 35px 25px;
+		transform: rotate(3deg);
+	}
+	37% {
+		transform-origin: 35px 50px;
+		transform: rotate(-3deg);
+	}
+	50% {
+		transform-origin: 35px 50px;
+		transform: rotate(3deg);
+	}
+	62% {
+		transform-origin: 35px 50px;
+		transform: rotate(-3deg);
+	}
+	75% {
+		transform-origin: 35px 25px;
+		transform: rotate(3deg);
+	}
+	87% {
+		transform-origin: 35px 25px;
+		transform: rotate(-3deg);
+	}
+	100% {
+		transform-origin: 35px 25px;
+		transform: rotate(3deg);
+	}
+}

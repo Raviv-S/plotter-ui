@@ -1,0 +1,381 @@
+/*
+ * Copyright 2017-2021 Elyra Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// This file contains styles used to customize the default styles for common
+// canvas.
+
+// Some useful variations on Carbon colors
+$blue: lighten($focus, 25%);
+$light-blue: lighten($focus, 43%);
+$dark-blue: lighten($focus, 10%);
+
+// Node colors for the Regular (Vertical) theme
+$node-body-stroke: $blue;
+$node-body-fill: $light-blue;
+
+$node-port-output-stroke-color: $blue;
+// $node-port-output-fill-color: $ui-background;
+$node-port-output-fill-color: $light-blue;
+
+$node-port-output-connected-stroke-color: $blue;
+$node-port-output-connected-fill-color: $light-blue;
+
+$node-port-output-hover-stroke: $dark-blue;
+$node-port-output-hover-fill: $dark-blue;
+
+$node-port-input-stroke-color: $blue;
+$node-port-input-fill-color: $ui-background;
+
+$node-port-input-connected-stroke-color: $blue;
+$node-port-input-connected-fill-color: $light-blue;
+
+$node-port-input-arrow-connected-stroke-color: $dark-blue;
+$node-port-input-arrow-connected-fill-color: transparent;
+
+$node-port-input-connected-super-binding-stroke-color: $blue;
+$node-port-input-connected-super-binding-fill-color: $light-blue;
+
+// Customized colors
+// Nodes and comments
+.default {
+	stroke: $node-body-stroke;
+	stroke-width: 2;
+	fill: $node-body-fill;
+}
+
+.blue {
+	stroke: #828281;
+	fill: #9595dd;
+	stroke-width: 2;
+}
+
+.green {
+	stroke: #828281;
+	fill: #9ac29a;
+	stroke-width: 2;
+}
+
+.orange {
+	stroke: #828281;
+	fill: #cfa267;
+	stroke-width: 2;
+}
+
+.yellow {
+	stroke: #828281;
+	fill: #dfe094;
+	stroke-width: 2;
+}
+
+.purple {
+	stroke: #828281;
+	fill: #ae67cf;
+	stroke-width: 2;
+}
+
+.comment-blue .d3-comment-rect {
+	fill: #9595dd;
+	stroke: #000000;
+	// font-weight: bolder;
+}
+
+.comment-green .d3-comment-rect {
+	fill: #9ac29a;
+	stroke: #000000;
+	// font-weight: 800;
+}
+
+// Add all chosen colors for clusters.
+
+.classic-vertical {
+	.d3-node-body-outline {
+		stroke: $node-body-stroke;
+		stroke-width: 2;
+		fill: $node-body-fill;
+	}
+
+	.d3-node-group:hover > .d3-node-body-outline {
+		stroke: $node-body-stroke;
+		stroke-width: 2;
+		fill: $blue;
+	}
+
+	.d3-node-selection-highlight {
+		stroke-width: 0;
+		fill: transparent;
+		pointer-events: none;
+	}
+
+	.d3-node-selection-highlight[data-selected="yes"] {
+		stroke: $inverse-link;
+		stroke-dasharray: 5, 5;
+		stroke-width: 2;
+		fill: transparent;
+		pointer-events: none;
+	}
+
+	.d3-node-group.d3-node-unavailable .d3-node-body-outline,
+	.d3-node-group.d3-node-unavailable .d3-node-label {
+		stroke: $disabled-02;
+		fill: $disabled-03;
+		color: $disabled-02;
+	}
+
+	.d3-node-label {
+		font-size: 13px;
+	}
+
+	.d3-node-label-entry {
+		font-size: 13px;
+	}
+
+	.d3-node-port-output {
+		stroke: $node-port-output-stroke-color;
+		fill: $node-port-output-fill-color;
+		stroke-width: 2;
+	}
+
+	.d3-node-port-output[connected="yes"] {
+		stroke: $node-port-output-connected-stroke-color;
+		fill: $node-port-output-connected-fill-color;
+		stroke-width: 2;
+	}
+
+	.d3-node-port-output:hover {
+		stroke: $node-port-output-hover-stroke;
+		fill: $node-port-output-hover-fill;
+	}
+
+	.d3-node-port-input {
+		stroke: $node-port-input-stroke-color;
+		fill: $node-port-input-fill-color;
+		stroke-width: 2;
+	}
+
+	.d3-node-port-input-assoc,
+	.d3-node-port-output-assoc {
+		stroke: $node-port-input-stroke-color;
+		fill: $node-port-input-fill-color;
+		stroke-width: 2;
+	}
+
+	.d3-node-port-input-assoc:hover,
+	.d3-node-port-output-assoc:hover {
+		stroke: $node-port-output-hover-stroke;
+		fill: $node-port-output-hover-fill;
+	}
+
+	.d3-node-port-input[connected="yes"] {
+		stroke: $node-port-input-connected-stroke-color;
+		fill: $node-port-input-connected-fill-color;
+		stroke-width: 2;
+
+		.d3-node-port-input-arrow {
+			stroke: $node-port-input-arrow-connected-stroke-color;
+			fill: $node-port-input-arrow-connected-fill-color;
+		}
+	}
+
+	.d3-node-port-input[connected="yes"][isSupernodeBinding="yes"] {
+		stroke: $node-port-input-connected-super-binding-stroke-color;
+		fill: $node-port-input-connected-super-binding-fill-color;
+		stroke-width: 2;
+	}
+
+	.d3-node-port-input-arrow {
+		stroke: transparent;
+		fill: transparent;
+	}
+
+	.d3-comment-selection-highlight {
+		stroke-width: 0;
+		fill: transparent;
+		pointer-events: none;
+	}
+
+	.d3-comment-selection-highlight[data-selected="yes"] {
+		stroke: $inverse-link;
+		stroke-dasharray: 5 5;
+		stroke-width: 2;
+		fill: transparent;
+		pointer-events: none;
+	}
+}
+
+
+/* Drop zone customized text style */
+.dropzone-canvas-text {
+	position: absolute;
+	top: 100px;
+	left: 90px;
+	color: $ui-04;
+}
+
+/* This styles are used in the decoratorCanvas.json canvas file. */
+
+.leftDecoration {
+	fill: transparent;
+	stroke: #000000;
+}
+
+.rightDecoration {
+	fill: transparent;
+	stroke: #000000;
+}
+
+.rightDecoration:hover {
+	fill: #000000;
+	stroke: #000000;
+}
+
+.zoom-in-decoration {
+	fill: #F2F068;
+}
+
+.zoom-in-decoration:hover {
+	fill: #CFCEC0;
+}
+
+/*  Override styles for linkColorCanvas.json */
+
+.custom-canvas-comment {
+	cursor: "move";
+	fill: #FFFF99;
+	stroke: transparent;
+}
+
+.custom-comment-box {
+	fill: #2BE2CA;
+}
+
+.custom-link-error .d3-link-line {
+	stroke: #FF4500;
+}
+
+.custom-link-warning .d3-link-line {
+	stroke: #FFFF00;
+}
+
+.custom-link-okay .d3-link-line {
+	stroke: #008000;
+}
+
+.custom-link-blue .d3-link-line {
+	stroke: #0000FF;
+}
+
+/*  Override styles for comments in commentColorCanvas.json and commentUnderlap.json */
+
+.canvas-comment-1 .d3-comment-rect {
+	fill: #B98BA6;
+	stroke: #000000;
+}
+
+.canvas-comment-2 .d3-comment-rect {
+	fill: #A6C8E4;
+	stroke: #000000;
+}
+
+.canvas-comment-3 .d3-comment-rect {
+	fill: #A6C8E4;
+	stroke: #000000;
+}
+
+
+
+/* These styles are used in the portsColorCanvas.json canvas file. */
+
+.port-output-red {
+	stroke: #FF1493;
+	fill: #FFFFFF;
+	stroke-width: 2;
+}
+
+.port-output-red[connected="yes"] {
+	stroke: #FF00FF;
+	fill: #FF00FF;
+	stroke-width: 2;
+}
+
+.port-output-red:hover {
+	fill: #FF0000;
+}
+
+.port-output-yellow {
+	stroke: #DAA520;
+	fill: #FFFFFF;
+	stroke-width: 2;
+}
+
+.port-output-yellow[connected="yes"] {
+	stroke: #FFD700;
+	fill: #FFD700;
+	stroke-width: 2;
+}
+
+.port-output-yellow:hover {
+	fill: #DAA520;
+}
+
+.port-output-green {
+	stroke: #008000;
+	fill: #FFFFFF;
+	stroke-width: 2;
+}
+
+.port-output-green[connected="yes"] {
+	stroke: #008080;
+	fill: #008080;
+	stroke-width: 2;
+}
+
+.port-output-green:hover {
+	fill: #008000;
+}
+
+.port-output-blue {
+	stroke: #0000FF;
+	fill: #FFFFFF;
+	stroke-width: 2;
+}
+
+.port-output-blue[connected="yes"] {
+	stroke: #0000FF;
+	fill: #0000FF;
+	stroke-width: 2;
+}
+
+.port-output-blue:hover {
+	fill: #6A5ACD;
+
+}
+
+/* This style is used in the customAttrs.json canvas file. */
+
+.node-image[data-attr1] {
+	opacity: 0.25;
+}
+
+/* These styles are used by the custom JSX addd to the toolbar: TOOLBAR_TYPE_CUSTOM_ACTIONS */
+
+.toolbar-overflow-jsx-item .toolbar-custom-button {
+	width: 100%;
+	height: 100%;
+
+	& button {
+		height: 100%;
+	}
+}

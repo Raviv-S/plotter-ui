@@ -1,0 +1,203 @@
+{
+    "fybrik-notebook-sample/inventory": {
+     "titleDefinition": {
+      "title": "fybrik-notebook-sample/inventory",
+      "editable": false
+     },
+     "current_parameters": {
+      "assetDetails.connection.name": "inventory",
+      "assetDetails.connection.s3.bucket": "notebook-sample",
+      "assetDetails.connection.s3.endpoint": "s3.eu-gb.cloud-object-storage.appdomain.cloud",
+      "assetDetails.connection.s3.object_key": "inventory.csv",
+      "assetDetails.connection.type": 2,
+      "assetDetails.format": "csv",
+      "assetDetails.vault.read.address": "http://vault.fybrik-system:8200",
+      "assetDetails.vault.read.authPath": "",
+      "assetDetails.vault.read.role": "module",
+      "assetDetails.vault.read.secretPath": "/v1/kubernetes-secrets/paysim-csv?namespace=fybrik-notebook-sample"
+     },
+     "parameters": [
+      {
+       "id": "assetDetails.vault.read.secretPath",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.connection.s3.endpoint",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.vault.read.role",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.vault.read.address",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.format",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.connection.s3.object_key",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.connection.type",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.connection.s3.bucket",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.vault.read.authPath",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.connection.name",
+       "type": "string"
+      }
+     ]
+    },
+    "fybrik-notebook-sample/paysim-csv": {
+     "titleDefinition": {
+      "title": "fybrik-notebook-sample/paysim-csv",
+      "editable": false
+     },
+     "current_parameters": {
+      "assetDetails.connection.name": "paysim-csv",
+      "assetDetails.connection.s3.bucket": "notebook-sample",
+      "assetDetails.connection.s3.endpoint": "s3.eu-gb.cloud-object-storage.appdomain.cloud",
+      "assetDetails.connection.s3.object_key": "data.csv",
+      "assetDetails.connection.type": 2,
+      "assetDetails.format": "csv",
+      "assetDetails.vault.read.address": "http://vault.fybrik-system:8200",
+      "assetDetails.vault.read.authPath": "",
+      "assetDetails.vault.read.role": "module",
+      "assetDetails.vault.read.secretPath": "/v1/kubernetes-secrets/paysim-csv?namespace=fybrik-notebook-sample"
+     },
+     "parameters": [
+      {
+       "id": "assetDetails.vault.read.authPath",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.vault.read.secretPath",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.connection.s3.endpoint",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.connection.type",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.connection.name",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.vault.read.address",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.connection.s3.bucket",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.connection.s3.object_key",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.format",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.vault.read.role",
+       "type": "string"
+      }
+     ]
+    },
+    "fybrik-notebook-sample/users": {
+     "titleDefinition": {
+      "title": "fybrik-notebook-sample/users",
+      "editable": false
+     },
+     "current_parameters": {
+      "assetDetails.connection.name": "users",
+      "assetDetails.connection.s3.bucket": "notebook-sample",
+      "assetDetails.connection.s3.endpoint": "s3.eu-gb.cloud-object-storage.appdomain.cloud",
+      "assetDetails.connection.s3.object_key": "users.csv",
+      "assetDetails.connection.type": 2,
+      "assetDetails.format": "csv",
+      "assetDetails.vault.read.address": "http://vault.fybrik-system:8200",
+      "assetDetails.vault.read.authPath": "",
+      "assetDetails.vault.read.role": "module",
+      "assetDetails.vault.read.secretPath": "/v1/kubernetes-secrets/paysim-csv?namespace=fybrik-notebook-sample"
+     },
+     "parameters": [
+      {
+       "id": "assetDetails.connection.s3.endpoint",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.vault.read.secretPath",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.connection.s3.object_key",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.connection.name",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.connection.s3.bucket",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.vault.read.address",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.format",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.vault.read.authPath",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.vault.read.role",
+       "type": "string"
+      },
+      {
+       "id": "assetDetails.connection.type",
+       "type": "string"
+      }
+     ]
+    },
+    "ws-notebook": {
+     "titleDefinition": {
+      "title": "ws-notebook",
+      "editable": false
+     },
+     "current_parameters": {
+      "clusterName": "",
+      "workloadSelector.matchLabels.app": "ws-notebook"
+     },
+     "parameters": [
+      {
+       "id": "workloadSelector.matchLabels.app",
+       "type": "string"
+      },
+      {
+       "id": "clusterName",
+       "type": "string"
+      }
+     ]
+    }
+   }
+   

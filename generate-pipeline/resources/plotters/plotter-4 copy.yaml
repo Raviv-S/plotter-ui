@@ -1,0 +1,266 @@
+apiVersion: app.fybrik.io/v1alpha1
+kind: Plotter
+metadata:
+  name: app1-ns1 # plotter name is a combination of app and namespace
+  namespace: fybrik-system
+  labels:
+spec:
+  appSelector:
+    clusterName: ""
+    workloadSelector:
+      matchLabels:
+        app: ws-notebook
+  assets:
+    fybrik-notebook-sample/paysim-csv:
+      assetDetails:
+        connection:
+          name: paysim-csv
+          s3:
+            bucket: notebook-sample
+            endpoint: s3.eu-gb.cloud-object-storage.appdomain.cloud
+            object_key: data.csv
+          type: 2
+        format: csv
+        vault:
+          read:
+            address: http://vault.fybrik-system:8200
+            authPath: ""
+            role: module
+            secretPath: /v1/kubernetes-secrets/paysim-csv?namespace=fybrik-notebook-sample
+    fybrik-notebook-sample/users:
+      assetDetails:
+        connection:
+          name: users
+          s3:
+            bucket: notebook-sample
+            endpoint: s3.eu-gb.cloud-object-storage.appdomain.cloud
+            object_key: users.csv
+          type: 2
+        format: csv
+        vault:
+          read:
+            address: http://vault.fybrik-system:8200
+            authPath: ""
+            role: module
+            secretPath: /v1/kubernetes-secrets/paysim-csv?namespace=fybrik-notebook-sample
+    fybrik-notebook-sample/inventory:
+      assetDetails:
+        connection:
+          name: inventory
+          s3:
+            bucket: notebook-sample
+            endpoint: s3.eu-gb.cloud-object-storage.appdomain.cloud
+            object_key: inventory.csv
+          type: 2
+        format: csv
+        vault:
+          read:
+            address: http://vault.fybrik-system:8200
+            authPath: ""
+            role: module
+            secretPath: /v1/kubernetes-secrets/paysim-csv?namespace=fybrik-notebook-sample
+  flows:
+  - name: flow-paysim
+    flowType: read
+    assetId: "m4d-notebook-sample/paysim-csv"
+    subFlows:
+    - flowType: read
+      name: ""
+      steps:
+      - - cluster: thegreendragon
+          name: ""
+          template: read-template
+          parameters:
+            api:
+              endpoint:
+                hostname: arrow-flight-read-server
+                port: 80
+                scheme: grpc
+              format: arrow
+            source:  
+              assetId: fybrik-notebook-sample/paysim-csv
+      - - cluster: thegreendragon
+          name: ""
+          template: transform-template
+          parameters:
+            api:
+              endpoint:
+                hostname: arrow-flight-transform-server
+                port: 80
+                scheme: grpc
+              format: arrow
+            action:
+            - name: RedactAction
+              description: "redacting columns: [nameOrig]"
+              columns:
+              - bloodGroup
+              options:
+                redactValue: "XXXXX"
+            source:
+              api:
+                endpoint:
+                  hostname: arrow-flight-read-server
+                  port: 80
+                  scheme: grpc
+                format: arrow
+              assetId: fybrik-notebook-sample/paysim-csv
+      triggers:
+      - workload
+  - name: flow-users
+    flowType: read
+    assetId: "m4d-notebook-sample/users"
+    subFlows:
+    - name: subflow-users
+      flowType: read
+      steps:
+      - - cluster: thegreendragon2
+          name: ""
+          template: read-template
+          parameters:
+            api:
+              endpoint:
+                hostname: arrow-flight-read-server
+                port: 80
+                scheme: grpc
+              format: arrow
+            source: 
+              assetId: fybrik-notebook-sample/users
+      - - cluster: thegreendragon2
+          name: ""
+          template: transform-template
+          parameters:
+            api:
+              endpoint:
+                hostname: arrow-flight-transform-server
+                port: 80
+                scheme: grpc
+              format: arrow
+            action:
+            - name: RedactAction
+              description: "redacting columns: [nameOrig]"
+              columns:
+              - bloodGroup
+              options:
+                redactValue: "XXXXX"
+            source:
+              api:
+                endpoint:
+                  hostname: arrow-flight-read-server
+                  port: 80
+                  scheme: grpc
+                format: arrow
+              assetId: fybrik-notebook-sample/users
+      triggers:
+      - workload
+  - name: flow-inventory
+    flowType: read
+    assetId: "m4d-notebook-sample/inventory"
+    subFlows:
+    - name: subflow-inventory
+      flowType: read
+      steps:
+      - - cluster: thegreendragon
+          name: ""
+          template: read-template
+          parameters:
+            api:
+              endpoint:
+                hostname: arrow-flight-read-server
+                port: 80
+                scheme: grpc
+              format: arrow
+            source:
+              assetId: fybrik-notebook-sample/inventory
+      - - cluster: thegreendragon
+          name: ""
+          template: transform-template
+          parameters:
+            api:
+              endpoint:
+                hostname: arrow-flight-transform-server
+                port: 80
+                scheme: grpc
+              format: arrow
+            action:
+            - name: RedactAction
+              description: "redacting columns: [nameOrig]"
+              columns:
+              - bloodGroup
+              options:
+                redactValue: "XXXXX"
+            source:
+              api:
+                endpoint:
+                  hostname: arrow-flight-read-server
+                  port: 80
+                  scheme: grpc
+                format: arrow
+              assetId: fybrik-notebook-sample/inventory
+      triggers:
+      - workload
+  templates:
+    transform-template:
+      modules:
+      - name: arrow-read-with-transform
+        chart:
+          name: ghcr.io/fybrik/arrow-flight-transform-config:latest
+          values:
+            image.tag: latest
+        scope: cluster
+        type: config
+      - name: transform-conf
+        chart:
+          name: ghcr.io/mesh-for-data/fybrik-arrow-flight-transform-conf:0.1.0
+        type: plugin
+    read-template:
+      modules:
+      - name: arrow-read-without-transform
+        chart:
+          name: ghcr.io/fybrik/arrow-flight-config:latest
+          values:
+            image.tag: latest
+        scope: cluster
+        type: config
+status:
+  assets:
+    fybrik-notebook-sample/paysim-csv:
+      ready: true
+    fybrik-notebook-sample/users:
+      ready: true
+    fybrik-notebook-sample/inventory:
+      ready: true
+  blueprints:
+    thegreendragon:
+      name: my-notebook-tmp-33uu3-fybrik-notebook-sample
+      namespace: fybrik-blueprints
+      status:
+        modules:
+          arrow-read-with-transform:
+            ready: true
+          arrow-read-without-transform:
+            ready: true
+        observedGeneration: 1
+        observedState:
+          ready: true
+        releases:
+          notebook-fybrik-notebook-arrow-flight-config-13: 1
+          notebook-fybrik-notebook-arrow-flight-transform-config-13: 1
+    thegreendragon2:
+      name: my-notebook-tmp-33uu3-fybrik-notebook-sample
+      namespace: fybrik-blueprints
+      status:
+        modules:
+          arrow-read-with-transform:
+            ready: true
+          arrow-read-without-transform:
+            ready: true
+        observedGeneration: 1
+        observedState:
+          ready: true
+        releases:
+          notebook-fybrik-notebook-arrow-flight-config-13: 1
+          notebook-fybrik-notebook-arrow-flight-transform-config-13: 1
+  observedGeneration: 1
+  observedState:
+    ready: true
+  readyTimestamp: "2021-10-06T08:58:59Z"
