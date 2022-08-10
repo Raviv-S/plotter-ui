@@ -36,7 +36,7 @@ In main repo dir:
 npm install
 ```
 
-## Run server:
+## Run server locally:
 
 In main repo dir:
 ```
