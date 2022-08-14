@@ -4,7 +4,7 @@
 
 The UI is built with [elyra-canvas](https://github.com/elyra-ai/canvas/wiki), an open source tool developed in IBM.
 
-For help you can follow thier slack channel: @elyra-canvas
+For more info and help, follow `elyra canvas` slack channel at: @elyra-canvas
 
 
 ![A plotter-ui example](docs/plotter-demo.png?raw=true "Title")
@@ -48,7 +48,7 @@ This command will take a while to finish and will create `node_modules/` dir.
 
 ## Run application locally:
 
-After you finish installing all packages, run the application with this command on the main directory (takes several minutes):
+After you finish installing all the packages, run the application with this command on the main directory (takes several minutes):
 ```
 npm start
 ```
