@@ -20,7 +20,6 @@ func Flatten(m map[string]interface{}) map[string]interface{} {
 				case string:
 					o[k] = strconv.Itoa(i) + "-" + nv.(string)
 				case []interface{}:
-					// pprint("bbbbbb")
 					for i2, nv3 := range child {
 						switch nv3.(type) {
 						case string:
@@ -48,12 +47,6 @@ func Flatten(m map[string]interface{}) map[string]interface{} {
 
 func (plotter Plotter) PToJson() map[string]ParamDef {
 	main := make(map[string]ParamDef)
-	// for asset, value := range plotter.Spec.Assets {
-	// 	var m map[string]interface{}
-	// 	marsh, _ := json.Marshal(value)
-	// 	json.Unmarshal(marsh, &m)
-	// 	main[asset] = ElementToParamDefFormat(asset, Flatten(m))
-	// }
 	var m map[string]interface{}
 	marsh, _ := json.Marshal(plotter.Spec.Selector)
 	json.Unmarshal(marsh, &m)
@@ -104,31 +97,43 @@ func (plotter Plotter) AddAssetsParams(allParams map[string]ParamDef) {
 }
 
 func (plotter Plotter) AddTemplateParams(allParams map[string]ParamDef) {
-	for templateName, templateValue := range plotter.Spec.Templates {
-		var m = make(map[string]interface{})
-		marsh, _ := json.Marshal(templateValue)
-		json.Unmarshal(marsh, &m)
-		allParams[templateName] = ElementToParamDefFormat(templateName, NewFlatten(NewFlatten(m)))
+	for clusterName := range plotter.Status.Blueprints {
+		for templateName, templateValue := range plotter.Spec.Templates {
+			templateName = templateName + "-" + clusterName
+			var m = make(map[string]interface{})
+			marsh, _ := json.Marshal(templateValue)
+			json.Unmarshal(marsh, &m)
+			allParams[templateName] = ElementToParamDefFormat(templateName, NewFlatten(NewFlatten(m)))
+		}
 	}
 }
 
-// func MergeMaps()
+func (plotter Plotter) AddModuleParams(allParams map[string]ParamDef) {
+	for clusterName := range plotter.Status.Blueprints {
+		for templateId := range plotter.Spec.Templates {
+			for _, module := range plotter.Spec.Templates[templateId].Modules {
+				moduleName := module.Name + "-module-" + clusterName
+				var m = make(map[string]interface{})
+				marsh, _ := json.Marshal(module)
+				json.Unmarshal(marsh, &m)
+				allParams[moduleName] = ElementToParamDefFormat(moduleName, NewFlatten(NewFlatten(m)))
+			}
+		}
+	}
+}
 
 func (plotter Plotter) AllParams() map[string]ParamDef {
 	allParams := make(map[string]ParamDef)
 	plotter.AddWorkloadParams(allParams)
 	plotter.AddAssetsParams(allParams)
 	plotter.AddTemplateParams(allParams)
+	plotter.AddModuleParams(allParams)
 	return allParams
 }
 
 func (plotter Plotter) PlotterToFlatten() {
 	main := make(map[string]interface{})
 	marsh, _ := json.Marshal(plotter.Status.Assets["fybrik-notebook-sample/paysim-csv"])
-	// marsh, _ := json.Marshal(plotter.ObjectMeta)
 	json.Unmarshal(marsh, &main)
-	// pprint(NewFlatten(NewFlatten(NewFlatten(main))))
-	// pprint(NewFlatten(main))
 	pprint(plotter.Status.Assets["fybrik-notebook-sample/paysim-csv"].Ready)
-	// rprint(plotter.Status.Assets["fybrik-notebook-sample/users"])
 }

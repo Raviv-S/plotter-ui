@@ -2,14 +2,20 @@
 
 `plotter-ui` is a tool to visualize Fybrik plotter.
 
-The UI is built with [elyra-canvas](https://github.com/elyra-ai/canvas/wiki).
+The UI is built with [elyra-canvas](https://github.com/elyra-ai/canvas/wiki), an open source tool developed in IBM.
+
+For help you can follow thier slack channel: @elyra-canvas
+
+
+![A plotter-ui example](docs/plotter-demo.png?raw=true "Title")
+
 
 ## Setup:
 
 ### Requirements:
-`go` version 1.16+
++ `go` version 1.16+
 
-`node` version 14.X.X
++ `node` version 14.X.X
 
 
 ### Setup required:
@@ -31,17 +37,22 @@ nvm use 14.20.0
 
 ## Build package:
 
-In main repo dir:
+On the first use you'll need to install all the required packages.
+
+In main dir run this commmand:
 ```
 npm install
 ```
+This command will take a while to finish and will create `node_modules/` dir.
 
-## Run server locally:
 
-In main repo dir:
+## Run application locally:
+
+After you finish installing all packages, run the application with this command on the main directory (takes several minutes):
 ```
 npm start
 ```
+
 
 # Create a pipeline:
 
@@ -49,3 +60,5 @@ In generate-pipline:
 ```
 go run main.go <plotter-path>
 ```
+
+You can use some of the example plotters in `examples/`

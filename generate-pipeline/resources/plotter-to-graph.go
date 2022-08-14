@@ -40,7 +40,6 @@ func (plotter Plotter) ConvertToGraph() *Graph {
 			src := subflow.Steps[0][0].Parameters.Source.AssetID
 			for _, step := range subflow.Steps {
 				template := plotter.AddTemplate(graph, step[0].Template, step[0].Cluster)
-				//template.Triggers = triggers
 				dest := step[0].Parameters.Sink
 				if dest != nil {
 					dest := dest.AssetID
@@ -91,11 +90,11 @@ func (plotter Plotter) AddTemplate(graph Graph, templateId string, cluster strin
 	if !tExists || !cExists {
 		os.Exit(1)
 	}
-	template, nodeExists := graph.Supernodes[templateId+"-template-"+cluster]
+	template, nodeExists := graph.Supernodes[templateId+"-"+cluster]
 	if nodeExists {
 		return template
 	}
-	template = graph.CreateSupernode(templateId + "-template-" + cluster)
+	template = graph.CreateSupernode(templateId + "-" + cluster)
 	template.Title = templateId
 	template.Color = plotter.ClusterColors[cluster]
 	template.Image = nodeImages[template.Title]
@@ -112,7 +111,6 @@ func (plotter Plotter) AddModule(graph Graph, moduleName string, cluster string)
 	node.Color = plotter.ClusterColors[cluster]
 	node.Image = nodeImages[node.Title]
 	status, statusExist := plotter.Status.Blueprints[cluster].Status.ModulesState[moduleName]
-	//pprint(plotter.Status.Blueprints[cluster].Status)
 	if statusExist {
 		node.AddStatus(status)
 	}

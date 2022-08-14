@@ -5,7 +5,7 @@ import (
 )
 
 func PlotterToCanvas() {
-	plotter := res.ReadPlotter("./resources/plotters/plotter-7.yaml")
+	plotter := res.ReadPlotter("../examples/plotter-7.yaml")
 	plotter.ConvertToGraph().ConvertToCanvasPipeline().
 		ToFile("./generated-pipeline.json")
 }

@@ -56,7 +56,6 @@ func (g *Graph) ConnectNodes(src *Node, dest *Node, label string) {
 	l := Link{SourceNode: src, Label: label}
 	dest.Inputs = append(dest.Inputs, &l)
 	src.IsOutput = true
-	//r := Link{SourceNode: dest, Label: label}
 
 }
 

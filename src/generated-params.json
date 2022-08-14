@@ -1,0 +1,345 @@
+{
+ "arrow-flight-module-module-thegreendragon": {
+  "titleDefinition": {
+   "title": "arrow-flight-module-module-thegreendragon",
+   "editable": false
+  },
+  "current_parameters": {
+   "chart.name": "ghcr.io/fybrik/arrow-flight-module-chart:latest",
+   "chart.values.image.tag": "latest",
+   "name": "arrow-flight-module",
+   "scope": "workload",
+   "type": "service"
+  },
+  "parameters": [
+   {
+    "id": "scope",
+    "type": "string"
+   },
+   {
+    "id": "name",
+    "type": "string"
+   },
+   {
+    "id": "type",
+    "type": "string"
+   },
+   {
+    "id": "chart.name",
+    "type": "string"
+   },
+   {
+    "id": "chart.values.image.tag",
+    "type": "string"
+   }
+  ],
+  "uihints": {
+   "Id": "",
+   "PropGroups": null
+  }
+ },
+ "copy-module-thegreendragon": {
+  "titleDefinition": {
+   "title": "copy-module-thegreendragon",
+   "editable": false
+  },
+  "current_parameters": {
+   "chart.name": "ghcr.io/fybrik/fybrik-implicit-copy-batch:0.1.0",
+   "name": "copy",
+   "scope": "asset",
+   "type": "service"
+  },
+  "parameters": [
+   {
+    "id": "type",
+    "type": "string"
+   },
+   {
+    "id": "chart.name",
+    "type": "string"
+   },
+   {
+    "id": "scope",
+    "type": "string"
+   },
+   {
+    "id": "name",
+    "type": "string"
+   }
+  ],
+  "uihints": {
+   "Id": "",
+   "PropGroups": null
+  }
+ },
+ "copy-thegreendragon": {
+  "titleDefinition": {
+   "title": "copy-thegreendragon",
+   "editable": false
+  },
+  "current_parameters": {
+   "modules-0.chart.name": "ghcr.io/fybrik/fybrik-implicit-copy-batch:0.1.0",
+   "modules-0.name": "copy",
+   "modules-0.scope": "asset",
+   "modules-0.type": "service",
+   "name": "copy"
+  },
+  "parameters": [
+   {
+    "id": "modules-0.type",
+    "type": "string"
+   },
+   {
+    "id": "modules-0.chart.name",
+    "type": "string"
+   },
+   {
+    "id": "name",
+    "type": "string"
+   },
+   {
+    "id": "modules-0.scope",
+    "type": "string"
+   },
+   {
+    "id": "modules-0.name",
+    "type": "string"
+   }
+  ],
+  "uihints": {
+   "Id": "",
+   "PropGroups": null
+  }
+ },
+ "fybrik-notebook-sample/paysim-csv": {
+  "titleDefinition": {
+   "title": "fybrik-notebook-sample/paysim-csv",
+   "editable": false
+  },
+  "current_parameters": {
+   "assetDetails.connection.name": "paysim-csv",
+   "assetDetails.connection.s3.bucket": "notebook-sample",
+   "assetDetails.connection.s3.endpoint": "s3.eu-gb.cloud-object-storage.appdomain.cloud",
+   "assetDetails.connection.s3.object_key": "data.csv",
+   "assetDetails.connection.type": 2,
+   "assetDetails.format": "csv",
+   "assetDetails.vault.read.address": "http://vault.fybrik-system:8200",
+   "assetDetails.vault.read.authPath": "",
+   "assetDetails.vault.read.role": "module",
+   "assetDetails.vault.read.secretPath": "/v1/kubernetes-secrets/paysim-csv?namespace=fybrik-notebook-sample",
+   "status.ready": true
+  },
+  "parameters": [
+   {
+    "id": "assetDetails.connection.name",
+    "type": "string"
+   },
+   {
+    "id": "assetDetails.connection.s3.bucket",
+    "type": "string"
+   },
+   {
+    "id": "assetDetails.vault.read.address",
+    "type": "string"
+   },
+   {
+    "id": "assetDetails.connection.type",
+    "type": "string"
+   },
+   {
+    "id": "assetDetails.connection.s3.object_key",
+    "type": "string"
+   },
+   {
+    "id": "assetDetails.connection.s3.endpoint",
+    "type": "string"
+   },
+   {
+    "id": "assetDetails.vault.read.role",
+    "type": "string"
+   },
+   {
+    "id": "status.ready",
+    "type": "string"
+   },
+   {
+    "id": "assetDetails.format",
+    "type": "string"
+   },
+   {
+    "id": "assetDetails.vault.read.secretPath",
+    "type": "string"
+   },
+   {
+    "id": "assetDetails.vault.read.authPath",
+    "type": "string"
+   }
+  ],
+  "uihints": {
+   "Id": "",
+   "PropGroups": null
+  }
+ },
+ "fybrik-notebook-sample/paysim-csv-copy": {
+  "titleDefinition": {
+   "title": "fybrik-notebook-sample/paysim-csv-copy",
+   "editable": false
+  },
+  "current_parameters": {
+   "advertisedAssetId": "fybrik-notebook-sample/paysim-csv",
+   "assetDetails.connection.name": "S3",
+   "assetDetails.connection.s3.bucket": "my-notebook-tmp-33uu3-fybrik-notebook-samplea13821ae72",
+   "assetDetails.connection.s3.endpoint": "s3.eu-gb.cloud-object-storage.appdomain.cloud",
+   "assetDetails.connection.s3.object_key": "fybrik-notebook-sample/paysim-csvcacf518ec1",
+   "assetDetails.connection.type": 2,
+   "assetDetails.format": "parquet",
+   "assetDetails.vault.read.address": "http://vault.fybrik-system:8200",
+   "assetDetails.vault.read.authPath": "",
+   "assetDetails.vault.read.role": "module",
+   "assetDetails.vault.read.secretPath": "/v1/kubernetes-secrets/bucket-creds?namespace=fybrik-system",
+   "assetDetails.vault.write.address": "http://vault.fybrik-system:8200",
+   "assetDetails.vault.write.authPath": "",
+   "assetDetails.vault.write.role": "module",
+   "assetDetails.vault.write.secretPath": "/v1/kubernetes-secrets/bucket-creds?namespace=fybrik-system",
+   "status.ready": false
+  },
+  "parameters": [
+   {
+    "id": "assetDetails.connection.name",
+    "type": "string"
+   },
+   {
+    "id": "assetDetails.connection.s3.bucket",
+    "type": "string"
+   },
+   {
+    "id": "assetDetails.vault.write.address",
+    "type": "string"
+   },
+   {
+    "id": "assetDetails.connection.s3.object_key",
+    "type": "string"
+   },
+   {
+    "id": "status.ready",
+    "type": "string"
+   },
+   {
+    "id": "advertisedAssetId",
+    "type": "string"
+   },
+   {
+    "id": "assetDetails.vault.write.role",
+    "type": "string"
+   },
+   {
+    "id": "assetDetails.vault.read.secretPath",
+    "type": "string"
+   },
+   {
+    "id": "assetDetails.format",
+    "type": "string"
+   },
+   {
+    "id": "assetDetails.vault.read.address",
+    "type": "string"
+   },
+   {
+    "id": "assetDetails.vault.read.role",
+    "type": "string"
+   },
+   {
+    "id": "assetDetails.connection.s3.endpoint",
+    "type": "string"
+   },
+   {
+    "id": "assetDetails.vault.write.authPath",
+    "type": "string"
+   },
+   {
+    "id": "assetDetails.connection.type",
+    "type": "string"
+   },
+   {
+    "id": "assetDetails.vault.write.secretPath",
+    "type": "string"
+   },
+   {
+    "id": "assetDetails.vault.read.authPath",
+    "type": "string"
+   }
+  ],
+  "uihints": {
+   "Id": "",
+   "PropGroups": null
+  }
+ },
+ "read-thegreendragon": {
+  "titleDefinition": {
+   "title": "read-thegreendragon",
+   "editable": false
+  },
+  "current_parameters": {
+   "modules-0.chart.name": "ghcr.io/fybrik/arrow-flight-module-chart:latest",
+   "modules-0.chart.values.image.tag": "latest",
+   "modules-0.name": "arrow-flight-module",
+   "modules-0.scope": "workload",
+   "modules-0.type": "service",
+   "name": "read"
+  },
+  "parameters": [
+   {
+    "id": "name",
+    "type": "string"
+   },
+   {
+    "id": "modules-0.scope",
+    "type": "string"
+   },
+   {
+    "id": "modules-0.name",
+    "type": "string"
+   },
+   {
+    "id": "modules-0.type",
+    "type": "string"
+   },
+   {
+    "id": "modules-0.chart.name",
+    "type": "string"
+   },
+   {
+    "id": "modules-0.chart.values.image.tag",
+    "type": "string"
+   }
+  ],
+  "uihints": {
+   "Id": "",
+   "PropGroups": null
+  }
+ },
+ "ws-notebook": {
+  "titleDefinition": {
+   "title": "ws-notebook",
+   "editable": false
+  },
+  "current_parameters": {
+   "clusterName": "",
+   "workloadSelector.matchLabels.app": "ws-notebook"
+  },
+  "parameters": [
+   {
+    "id": "clusterName",
+    "type": "string"
+   },
+   {
+    "id": "workloadSelector.matchLabels.app",
+    "type": "string"
+   }
+  ],
+  "uihints": {
+   "Id": "",
+   "PropGroups": null
+  }
+ }
+}

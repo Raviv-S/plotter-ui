@@ -18,13 +18,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { IntlProvider } from "react-intl";
-import AllTypesCanvas from "./pipelines/plotter-6.json";
-import ModelerPalette from "./modelerPalette.json";
+import pipeline from "./generated-pipeline.json";
+import paramDef from "./generated-params.json";
 import { CommonCanvas, CanvasController } from "@elyra/canvas";
 import { CommonProperties } from "@elyra/canvas";
 import "./index.scss";
-import paramDef from "./param-def/param-def-gen.json";
-import paramDef2 from "./param-def/groups-demo.json";
 
 
 class App extends React.Component {
@@ -32,8 +30,7 @@ class App extends React.Component {
 		super(props);
 
 		this.canvasController = new CanvasController();
-		this.canvasController.setPipelineFlow(AllTypesCanvas);
-		this.canvasController.setPipelineFlowPalette(ModelerPalette);
+		this.canvasController.setPipelineFlow(pipeline);
 		this.canvasController.autoLayout();
 		this.canvasController.autoLayout("horizontal", this.canvasController.getSupernodes()[0].subflow_ref.pipeline_id_ref);
 		
@@ -43,11 +40,12 @@ class App extends React.Component {
 		this.state = {
 			showPropertiesDialog: false,
 			propertiesInfo: {
-				parameterDef: paramDef2,
+				parameterDef: paramDef,
 			},
 		}
 	}
 	
+	// This function is incase we want to design each node differently (Need to uncomment the part in the return function)
 	layoutHandler(data) {
 		const labLen = data.label ? data.label.length : 0;
 		let width = 120;
@@ -55,8 +53,8 @@ class App extends React.Component {
 		let selectionPath = "";
 		let imageWidth = 80;
 		let imageHeight = 80;
-		let imagePosX = 120;
-		let imagePosY = 110;
+		// let imagePosX = 120;
+		// let imagePosY = 110;
 
 		switch (data.op) {
 		case "rectangle": {
@@ -84,8 +82,8 @@ class App extends React.Component {
 			selectionPath = "M  -5 65 L  145 65 70 -5 5 65 Z";
 			imageWidth = 80;
 			imageHeight = 80;
-			imagePosX = 120;
-			imagePosY = 110;
+			// imagePosX = 120;
+			// imagePosY = 110;
 			break;
 		}
 		case "hexagon": {
@@ -106,98 +104,57 @@ class App extends React.Component {
 			ellipsisPosX: width - 25, // Always position 25px in from the right side
 			bodyPath: bodyPath,
 			selectionPath: selectionPath,
-			imageWidth: imageWidth
+			imageWidth: imageWidth,
+			imageHeight: imageHeight
 		};
 
 		return nodeFormat;
 	}
 
+	// Those functions handle the properties shown when clicking on a node.
 	closePropertiesEditorDialog = this.closePropertiesEditorDialog.bind(this);
-	applyPropertyChanges = this.applyPropertyChanges.bind(this);
 	clickActionHandler = this.clickActionHandler.bind(this);
 
 	closePropertiesEditorDialog() {
-		// console.log(this.state.showPropertiesDialog)
+		console.log(this.state.showPropertiesDialog)
 		this.currentEditorId = null;
 		this.setState({ showPropertiesDialog: false, propertiesInfo: {} });
-		// console.log(this.canvasController.isRightFlyoutOpen())
-	}
-
-	applyPropertyChanges(propertySet, appData, additionalInfo, undoInfo, uiProperties) {
-		var data = {
-		  propertySet: propertySet,
-		  appData: appData,
-		  additionalInfo: {
-			  messages: "hi",
-			  title: "title"
-		  }
-		};
-		// console.log("BYE")
-		// console.log(this)
 	}
 
 	clickActionHandler(data) {
-		
-		// 	clickType: "SINGLE_CLICK",
-		// 	objectType: "node",
-		// 	id: "fybrik-notebook-sample/paysim-csv-copy",
-		// 	//selectedObjectIds: this.objectModel.getSelectedObjectIds()
-		// }
-		//App.state.showPropertiesDialog = true;
 		if (data.objectType === "node"){
 			this.setState({ showPropertiesDialog: true, propertiesInfo: {parameterDef: paramDef[data.id]} });
 		} else {
 			this.setState({showPropertiesDialog: false})
 		}
-		if (data.objectType === "comment") {
-			console.log(data.id)
-		}
-		console.log(data.objectType);
 	}
-
-	editNodeHandler(nodeId) {
-
-	}
-	// this.canvasController.clickActionHandler({
-		// 	clickType: "SINGLE_CLICK",
-		// 	objectType: "node",
-		// 	id: "fybrik-notebook-sample/paysim-csv-copy",
-		// 	//selectedObjectIds: this.objectModel.getSelectedObjectIds()
-		// }))
 
 	getCommonProperties() {
-
 		const propertiesConfig = {
 			containerType: "Custom",
 			rightFlyout: true
 		}
-
 		const propertiesInfo = this.state.propertiesInfo
-
 		const callbacks = {
-			applyPropertyChanges: this.applyPropertyChanges,
 			closePropertiesDialog: this.closePropertiesEditorDialog,
 			actionHandler: this.clickActionHandler
 		};
 
-		//const showRightFlyout = true;
 		const commonProperties = (
 			<CommonProperties
 				ref={(instance) => {
 					this.CommonProperties = instance;
 				} }
-				propertiesInfo={propertiesInfo} // maybe change here to get from state
+				propertiesInfo={propertiesInfo}
 				propertiesConfig={propertiesConfig}
 				callbacks={callbacks}
 				showRightFlyout={true}
 				clickActionHandler= {this.clickActionHandler}
-				//selectionChangeHandler={this.selectionChangeHandler}
-				//light={this.state.light}
 			/>);
 
 		return commonProperties;
 	}
-	//rightFlyoutContent = this.getCommonProperties();
+
 	
 	render() {
 		
@@ -211,53 +168,42 @@ class App extends React.Component {
 			// enableParentClass: "nodes-colors",
 			// //enableSaveZoom: "LocalStorage",
 			// enableNodeLayout: {
-			// 	bodyPath: "     M  0 30 Q  0  0 60  0 Q 120  0 120 30 Q 120 60 60 60 Q  0 60  0 30 Z",
-			// 	selectionPath: "M -5 30 Q -5 -5 60 -5 Q 125 -5 125 30 Q 125 65 60 65 Q -5 65 -5 30 Z",
-			 	// defaultNodeWidth: 120,
-				// defaultNodeHeight: 100,
-			// 	imageWidth: 30,
-			// 	imageHeight: 30,
-			// 	imagePosX: 20,
-			// 	imagePosY: 10,
-			// 	labelEditable: true,
-			// 	labelPosX: 60,
-			// 	labelPosY: 37,
-			// 	labelWidth: 90,
-			// 	labelHeight: 17, // Should match the font size specified in css + padding
-			// 	ellipsisDisplay: true,
-			// 	ellipsisPosX: 100,
-			// 	ellipsisPosY: 20,
-			// 	haloDisplay: false,
-			// 	portPosY: 30
-			// }
+				// 	bodyPath: "     M  0 30 Q  0  0 60  0 Q 120  0 120 30 Q 120 60 60 60 Q  0 60  0 30 Z",
+				// 	selectionPath: "M -5 30 Q -5 -5 60 -5 Q 125 -5 125 30 Q 125 65 60 65 Q -5 65 -5 30 Z",
+				// 	defaultNodeWidth: 120,
+				// 	defaultNodeHeight: 100,
+				// 	imageWidth: 30,
+				// 	imageHeight: 30,
+				// 	imagePosX: 20,
+				// 	imagePosY: 10,
+				// 	labelEditable: true,
+				// 	labelPosX: 60,
+				// 	labelPosY: 37,
+				// 	labelWidth: 90,
+				// 	labelHeight: 17, // Should match the font size specified in css + padding
+				// 	ellipsisDisplay: true,
+				// 	ellipsisPosX: 100,
+				// 	ellipsisPosY: 20,
+				// 	haloDisplay: false,
+				// 	portPosY: 30
+				// }
 			
 		}
 		const rightFlyoutContent = this.getCommonProperties();
-		//const rightFlyoutContent = this.getCommonProperties
 		return (
 			<div id="harness-app-container">
 				<IntlProvider locale="en">
 					<CommonCanvas
 						canvasController={this.canvasController}
 						config={commonCanvasConfig}
-						layoutHandler={this.layoutHandler}
+						// layoutHandler={this.layoutHandler}
 						showRightFlyout={showRightFlyoutProp}
 						rightFlyoutContent={rightFlyoutContent}
 						clickActionHandler= {this.clickActionHandler}
 					/>
-					{/* <CommonProperties
-						ref={(instance) => {
-							this.CommonProperties = instance;
-						}}
-						propertiesInfo={this.propertiesInfo} // required
-						callbacks={this.callbacks} // required
-						propertiesConfig={this.propertiesConfig}
-						
-						/> */}
 				</IntlProvider>
 			</div>
 		);
-		
 	}
 }
 

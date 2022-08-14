@@ -58,7 +58,6 @@ func (g *Graph) ConvertToCanvasPipeline() *Canvas {
 
 func (n Node) ConvertToCanvasNode() *CanvasNode {
 	var canvasNode = CanvasNode{ID: n.Id, Type: "execution_node"}
-	// canvasNode.SubflowRef.PipelineIdRef = n.SupernodeParentId
 	canvasNode.AppData.UIData =
 		UIData{Label: n.Title,
 			Image:       n.Image,

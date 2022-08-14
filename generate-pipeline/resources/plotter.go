@@ -27,13 +27,11 @@ func ReadPlotter(filename string) *Plotter {
 	buf, err := ioutil.ReadFile(filename)
 	if err != nil {
 		fmt.Printf("err: %v\n", err)
-		// return
 	}
 	plotter := &Plotter{}
 	err = yaml.Unmarshal(buf, &plotter)
 	if err != nil {
 		fmt.Printf("err: %v\n", err)
-		// return
 	}
 	return plotter
 }

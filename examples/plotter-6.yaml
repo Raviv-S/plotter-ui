@@ -1,0 +1,138 @@
+apiVersion: app.fybrik.io/v1alpha1
+kind: Plotter
+metadata:
+  creationTimestamp: "2021-10-06T08:58:34Z"
+  finalizers:
+  - Plotter.finalizer
+  generation: 1
+  labels:
+    app.fybrik.io/appName: my-notebook-tmp-33uu3
+    app.fybrik.io/appNamespace: fybrik-notebook-sample
+  name: my-notebook-tmp-33uu3-fybrik-notebook-sample
+  namespace: fybrik-system
+  resourceVersion: "18672"
+  uid: ef2148bc-a2c3-4833-8d75-9d2d98521c9e
+spec:
+  appSelector:
+    clusterName: ""
+    workloadSelector:
+      matchLabels:
+        app: ws-notebook
+  assets:
+    fybrik-notebook-sample/paysim-csv:
+      assetDetails:
+        connection:
+          name: paysim-csv
+          s3:
+            bucket: notebook-sample
+            endpoint: s3.eu-gb.cloud-object-storage.appdomain.cloud
+            object_key: data.csv
+          type: 2
+        format: csv
+        vault:
+          read:
+            address: http://vault.fybrik-system:8200
+            authPath: ""
+            role: module
+            secretPath: /v1/kubernetes-secrets/paysim-csv?namespace=fybrik-notebook-sample
+    fybrik-notebook-sample/paysim-csv-copy:
+      advertisedAssetId: fybrik-notebook-sample/paysim-csv
+      assetDetails:
+        connection:
+          name: S3
+          s3:
+            bucket: my-notebook-tmp-33uu3-fybrik-notebook-samplea13821ae72
+            endpoint: s3.eu-gb.cloud-object-storage.appdomain.cloud
+            object_key: fybrik-notebook-sample/paysim-csvcacf518ec1
+          type: 2
+        format: parquet
+        vault:
+          read:
+            address: http://vault.fybrik-system:8200
+            authPath: ""
+            role: module
+            secretPath: /v1/kubernetes-secrets/bucket-creds?namespace=fybrik-system
+          write:
+            address: http://vault.fybrik-system:8200
+            authPath: ""
+            role: module
+            secretPath: /v1/kubernetes-secrets/bucket-creds?namespace=fybrik-system
+  flows:
+  - assetId: fybrik-notebook-sample/paysim-csv
+    flowType: read
+    name: fybrik-notebook-sample/paysim-csv-read
+    subFlows:
+    - flowType: copy
+      name: ""
+      steps:
+      - - cluster: thegreendragon
+          name: ""
+          parameters:
+            sink:
+              assetId: fybrik-notebook-sample/paysim-csv-copy
+            source:
+              assetId: fybrik-notebook-sample/paysim-csv
+          template: copy
+      triggers:
+      - init
+    - flowType: read
+      name: ""
+      steps:
+      - - cluster: thegreendragon
+          name: ""
+          parameters:
+            api:
+              endpoint:
+                hostname: notebook-fybrik-notebook-sample-ar-c2308.fybrik-blueprints
+                port: 80
+                scheme: grpc
+              format: arrow
+            source:
+              assetId: fybrik-notebook-sample/paysim-csv-copy
+          template: read
+      triggers:
+      - workload
+  templates:
+    copy:
+      modules:
+      - chart:
+          name: ghcr.io/fybrik/fybrik-implicit-copy-batch:0.1.0
+        name: copy
+        scope: asset
+        type: service
+      name: copy
+    read:
+      modules:
+      - chart:
+          name: ghcr.io/fybrik/arrow-flight-module-chart:latest
+          values:
+            image.tag: latest
+        name: arrow-flight-module
+        scope: workload
+        type: service
+      name: read
+status:
+  assets:
+    fybrik-notebook-sample/paysim-csv:
+      ready: true
+  blueprints:
+    thegreendragon:
+      name: my-notebook-tmp-33uu3-fybrik-notebook-sample
+      namespace: fybrik-blueprints
+      status:
+        modules:
+          arrow-flight-module:
+            ready: false
+          copy-a13821ae72:
+            ready: true
+        observedGeneration: 1
+        observedState:
+          ready: true
+        releases:
+          notebook-fybrik-notebook-sample-ar-c2308: 1
+          notebook-fybrik-notebook-sample-co-31f43: 1
+  observedGeneration: 1
+  observedState:
+    ready: true
+  readyTimestamp: "2021-10-06T08:58:59Z"
+
